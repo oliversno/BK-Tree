@@ -30,3 +30,4 @@
 *.exe
 *.out
 *.app
+.vscode/ipch/d8d1f9ba5528c60f/mmap_address.bin
