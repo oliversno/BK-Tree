@@ -20,11 +20,11 @@ class Node{
 
     void addChild(int key, std::string& word);
 
-    std::vector<int> keys() const;
+    std::vector<int>& keys() const;
 
     bool containsKey(int key) const;
 
-    Node &operator[](int i);
+    Node* &operator[](int i);
 
 };
 
