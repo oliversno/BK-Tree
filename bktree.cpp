@@ -8,7 +8,7 @@
 
     Node::~Node(){
         for(auto child : children){
-            child.second->~Node();
+            delete child.second;
             child.second = nullptr;
         }
     }
@@ -72,3 +72,11 @@
         }
         return data_table[a.length()][b.length()];
     }  
+
+    BKTree::BKTree(){}
+
+    //dtor
+    BKTree::~BKTree(){
+        delete root;
+        root = nullptr;
+    }
