@@ -13,6 +13,10 @@
         }
     }
 
+    std::string Node::getWord() const{
+        return word;
+    }
+
     void Node::addChild(int key, std::string& word){
         children[key] = new Node(word);
     }
@@ -80,3 +84,21 @@
         delete root;
         root = nullptr;
     }
+
+    void BKTree::add(std::string& word){
+        if(!root){
+            root = new Node(word);
+            return;
+        }
+        Node* current = root;
+        int dist = distence(current->getWord(), word);
+        if(dist == 0)
+            return;
+        while(current->containsKey(dist)){
+            current = (*current)[dist];
+            dist = distence(current->getWord(), word);
+        }
+        current->addChild(dist, word);
+    }
+
+    

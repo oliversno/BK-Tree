@@ -19,6 +19,8 @@ class Node{
     //dtor
     ~Node();
 
+    std::string getWord() const;
+
     void addChild(int key, std::string& word);
 
     std::vector<int>& keys() const;
