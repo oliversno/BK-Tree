@@ -31,7 +31,7 @@ class Node{
 
 class BKTree{
     private:
-    Node* root;
+    Node* root;    
 
     void recursiveSearch(Node* current_node, std::list<std::string>& results,
      std::string& query, int tolerence) const;
@@ -39,6 +39,12 @@ class BKTree{
     int distence(std::string& a, std::string& b) const;
 
     public:
+    //ctor
+    BKTree();
+
+    //dtor
+    ~BKTree();
+
     void add(std::string& word);
 
     std::list<std::string> search(std::string& query, int tolerence) const;
