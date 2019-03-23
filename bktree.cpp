@@ -86,6 +86,7 @@
     }
 
     void BKTree::add(std::string& word){
+        std::transform(word.begin(), word.end(), word.begin(), ::tolower);
         if(!root){
             root = new Node(word);
             return;
@@ -101,4 +102,25 @@
         current->addChild(dist, word);
     }
 
-    
+    std::list<std::string> BKTree::search(std::string& query, int tolerence) const{
+        std::transform(query.begin(), query.end(), query.begin(), ::tolower);
+        std::list<std::string> res;
+        recursiveSearch(root, res, query, tolerence);
+        return res;
+    }
+
+    void BKTree::recursiveSearch(Node* current_node, std::list<std::string>& results,
+     std::string& query, int tolerence) const{
+         int dist = distence(current_node->getWord(), query);
+         int min_dist = dist - tolerence;
+         int max_dist = dist + tolerence;
+         if(dist <= tolerence){
+             results.push_back(current_node->getWord());
+         }
+         std::vector<int> keys = current_node->keys();
+         for(int key : keys){
+             if(key >= min_dist && key >= max_dist){
+                 recursiveSearch((*current_node)[key], results, query, tolerence);
+             }
+         }
+     }
