@@ -11,7 +11,6 @@ include_directories(${PROJECT_SOURCE_DIR})
 
 # add_executable(main main.cpp bktree.cpp dict.cpp)
 
-
 if(BUILD_TESTS)
     include_directories(${GTEST_INCLUDE_DIRS})
 

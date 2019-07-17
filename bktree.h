@@ -21,7 +21,7 @@ class Node{
 
     std::string getWord() const;
 
-    void addChild(int key, std::string& word);
+    void addChild(int key, const std::string& word);
 
     std::vector<int>& keys() const;
 

@@ -1,5 +1,7 @@
 #include "dict.h"
 
+class InsertFailed{};
+
 void Dictionary::add(const std::string& new_word) {
         if(!dict.insert(new_word).second){
             throw InsertFailed();
