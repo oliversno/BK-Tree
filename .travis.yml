@@ -1,0 +1,40 @@
+language: cpp
+compiler: gcc
+os: linux
+
+branches:
+  only:
+    - /.*/
+
+notifications:
+  email: false
+
+matrix:
+  include:
+    - os: linux
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+          packages:
+            - g++-7
+      env:
+        - MATRIX_EVAL="CC=gcc-7 && CXX=g++-7"
+
+env:
+  global:
+    - CFLAGS="-Wall -Wextra -pedantic -Wconversion "
+    - CXXFLAGS="-Wall -Wextra -pedantic -Wconversion"
+before_install:
+    - eval "${MATRIX_EVAL}"
+    - which $CC
+    - which $CXX
+    - $CC --version
+    - $CXX --version
+
+script:
+  - mkdir build
+  - cd build
+  - cmake .. -DBUILD_TESTS=ON
+  - make
+  - ctest -V

@@ -2,7 +2,7 @@
 
 void Dictionary::add(const std::string& new_word) {
         if(!dict.insert(new_word).second){
-        throw InsertFailed();
+            throw InsertFailed();
     }
 }
 

@@ -1,5 +1,4 @@
 #include "bktree.h"
-#include "dict.h"
 
     Node::Node(std::string word_){
         std::transform(word_.begin(), word_.end(), word_.begin(), ::tolower);
@@ -42,7 +41,7 @@
         if(pair_it == children.end()){
             throw InvalidKeyException();
         }
-        return *pair_it.second;
+        return (*pair_it).second;
     }
 
     int BKTree::distence(std::string& a, std::string& b) const{
