@@ -7,6 +7,16 @@
 #include <list>
 #include <algorithm>
 
+class InvalidKeyException{
+    private:
+        int key;
+    public:
+        InvalidKeyException(int key_) : key(key_){}
+        int operator()(){
+            return key;
+        }
+};
+
 class Node{
     private:
     std::string word;
@@ -19,13 +29,13 @@ class Node{
     //dtor
     ~Node();
 
-    std::string getWord() const;
+    const std::string getWord() const;
 
-    void addChild(int key, const std::string& word);
+    void addChild(int key, const std::string& word_);
 
-    std::vector<int>& keys() const;
+    const std::vector<int> keys() const;
 
-    bool containsKey(int key) const;
+    const bool containsKey(int key) const;
 
     Node* &operator[](int i);
 
@@ -36,20 +46,21 @@ class BKTree{
     Node* root;    
 
     void recursiveSearch(Node* current_node, std::list<std::string>& results,
-     std::string& query, int tolerence) const;
+     const std::string& query, int tolerence) const;
 
-    int distence(std::string& a, std::string& b) const;
+    int distence(const std::string& a, const std::string& b) const;
 
     public:
     //ctor
-    BKTree();
+    BKTree() : root(nullptr){}
+    BKTree(Node* ptr) : root(ptr){}
 
     //dtor
     ~BKTree();
 
-    void add(std::string& word);
+    void add(const std::string& word);
 
-    std::list<std::string> search(std::string& query, int tolerence) const;
+    const std::list<std::string> search(const std::string& query_, int tolerence) const;
     
 };
 
