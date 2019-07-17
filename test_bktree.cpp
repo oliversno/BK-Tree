@@ -1,4 +1,4 @@
-#include "bktree.cpp"
+#include "bktree.h"
 #include <gtest/gtest.h>
 
 TEST(NodeTest, InitNode){
@@ -44,10 +44,100 @@ TEST(NodeTest, IndexNode){
     Node n("test");
     n.addChild(1, "rest");
     EXPECT_TRUE(n.containsKey(1));
-    EXPECT_EQ(n[1]->getWord, "rest");
+    EXPECT_EQ(n[1]->getWord(), "rest");
 }
 
 TEST(NodeTest, IndexFailNode){
     Node n("test");
     EXPECT_THROW(n[5], InvalidKeyException);
+}
+
+TEST(BKTest, InitBK){
+    BKTree tree;
+    SUCCEED();
+}
+
+TEST(BKTree, DistEmptyBK){
+    Node n("begin");
+    BKTree tree(&n);
+    tree.add("");
+    EXPECT_TRUE(n.containsKey(5));
+}
+
+TEST(BKTree, DistEmptyBK2){
+    Node n("");
+    BKTree tree(&n);
+    tree.add("addition");
+    EXPECT_TRUE(n.containsKey(8));
+}
+
+TEST(BKTree, DistEqualBK){
+    Node n("equal");
+    BKTree tree(&n);
+    tree.add("equal");
+    std::vector<int> vec = n.keys();
+    EXPECT_TRUE(vec.empty());
+}
+
+TEST(BKTree, DistAddBK){
+    Node n("sittin");
+    BKTree tree(&n);
+    tree.add("sitting");
+    EXPECT_TRUE(n.containsKey(1));
+}
+
+TEST(BKTree, DistDeleteBK){
+    Node n("sitting");
+    BKTree tree(&n);
+    tree.add("sittin");
+    EXPECT_TRUE(n.containsKey(1));
+}
+
+TEST(BKTree, DistSubBK){
+    Node n("run");
+    BKTree tree(&n);
+    tree.add("ran");
+    EXPECT_TRUE(n.containsKey(1));
+}
+
+TEST(BKTree, DistComplexBK){
+    Node n("kitten");
+    BKTree tree(&n);
+    tree.add("sitting");
+    EXPECT_TRUE(n.containsKey(3));
+}
+
+TEST(BKTree, AddEmptyBK){
+    BKTree tree;
+    tree.add("this");
+    const std::list<std::string> list = tree.search("this",0);
+    std::list<std::string>res{1,"this"};
+    EXPECT_EQ(list, res);
+}
+
+TEST(BKTree, AddMultipleLayersBK){
+    Node n("start");
+    BKTree tree(&n);
+    tree.add("stars");
+    Node* next = n[1];
+    tree.add("tart");
+    EXPECT_TRUE(next->containsKey(2));
+}
+
+TEST(BKTree, SearchBK){
+    BKTree tree;
+    tree.add("hell");
+    tree.add("help");
+    tree.add("shel");
+    tree.add("smell");
+    tree.add("fell");
+    tree.add("felt");
+    tree.add("oops");
+    tree.add("pop");
+    tree.add("oouch");
+    tree.add("halt");
+    std::list<std::string>list = tree.search("helt", 2);
+    std::vector<std::string>vec{"hell","help","fell","shel","felt","halt"};
+    std::list<std::string>res{vec.begin(),vec.end()};
+    EXPECT_EQ(list,res);
 }

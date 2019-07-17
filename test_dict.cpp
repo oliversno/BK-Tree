@@ -1,4 +1,4 @@
-#include "dict.cpp"
+#include "dict.h"
 #include <gtest/gtest.h>
 
 TEST(ApplyTest, InitDict){
