@@ -29,13 +29,13 @@ class Node{
     //dtor
     ~Node();
 
-    const std::string getWord() const;
+    std::string getWord() const;
 
     void addChild(int key, const std::string& word_);
 
-    const std::vector<int> keys() const;
+    std::vector<int> keys() const;
 
-    const bool containsKey(int key) const;
+    bool containsKey(int key) const;
 
     Node* &operator[](int i);
 

@@ -12,7 +12,7 @@ Node::~Node(){
     }
 }
 
-const std::string Node::getWord() const{
+std::string Node::getWord() const{
     return word;
 }
 
@@ -20,7 +20,7 @@ void Node::addChild(int key, const std::string& word){
     children[key] = new Node(word);
 }
 
-const std::vector<int> Node::keys() const{
+std::vector<int> Node::keys() const{
     std::vector<int> keys;
     keys.reserve(children.size());
     for(auto child : children){
@@ -29,7 +29,7 @@ const std::vector<int> Node::keys() const{
     return keys;
 }
 
-const bool Node::containsKey(int key) const{
+bool Node::containsKey(int key) const{
     return children.find(key) != children.end();
 }
 
@@ -43,15 +43,15 @@ Node* &Node::operator[](int i){
 
 int BKTree::distence(const std::string& a, const std::string& b) const{
     if(a.length() == 0)
-        return b.length();
+        return (int)b.length();
     if(b.length() == 0)
-        return a.length();
+        return (int)a.length();
     // a.length()+1 by b.length()+1 vector of zereos
     // DP table
     std::vector<std::vector<int>> data_table (a.length()+1, std::vector<int>(b.length()+1, 0));
 
-    for(int i = 1; i < a.length(); ++i){
-        for(int j = 1; j < b.length(); ++j){
+    for(unsigned int i = 1; i < a.length(); ++i){
+        for(unsigned int j = 1; j < b.length(); ++j){
             // if a string is empty then only possible edit is other string length
             if(i == 0) {
                 data_table[i][j] = j;

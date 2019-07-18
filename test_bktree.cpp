@@ -57,21 +57,21 @@ TEST(BKTest, InitBK){
     SUCCEED();
 }
 
-TEST(BKTree, DistEmptyBK){
+TEST(BKTest, DistEmptyBK){
     Node n("begin");
     BKTree tree(&n);
     tree.add("");
     EXPECT_TRUE(n.containsKey(5));
 }
 
-TEST(BKTree, DistEmptyBK2){
+TEST(BKTest, DistEmptyBK2){
     Node n("");
     BKTree tree(&n);
     tree.add("addition");
     EXPECT_TRUE(n.containsKey(8));
 }
 
-TEST(BKTree, DistEqualBK){
+TEST(BKTest, DistEqualBK){
     Node n("equal");
     BKTree tree(&n);
     tree.add("equal");
@@ -79,35 +79,35 @@ TEST(BKTree, DistEqualBK){
     EXPECT_TRUE(vec.empty());
 }
 
-TEST(BKTree, DistAddBK){
+TEST(BKTest, DistAddBK){
     Node n("sittin");
     BKTree tree(&n);
     tree.add("sitting");
     EXPECT_TRUE(n.containsKey(1));
 }
 
-TEST(BKTree, DistDeleteBK){
+TEST(BKTest, DistDeleteBK){
     Node n("sitting");
     BKTree tree(&n);
     tree.add("sittin");
     EXPECT_TRUE(n.containsKey(1));
 }
 
-TEST(BKTree, DistSubBK){
+TEST(BKTest, DistSubBK){
     Node n("run");
     BKTree tree(&n);
     tree.add("ran");
     EXPECT_TRUE(n.containsKey(1));
 }
 
-TEST(BKTree, DistComplexBK){
+TEST(BKTest, DistComplexBK){
     Node n("kitten");
     BKTree tree(&n);
     tree.add("sitting");
     EXPECT_TRUE(n.containsKey(3));
 }
 
-TEST(BKTree, AddEmptyBK){
+TEST(BKTest, AddEmptyBK){
     BKTree tree;
     tree.add("this");
     const std::list<std::string> list = tree.search("this",0);
@@ -115,7 +115,7 @@ TEST(BKTree, AddEmptyBK){
     EXPECT_EQ(list, res);
 }
 
-TEST(BKTree, AddMultipleLayersBK){
+TEST(BKTest, AddMultipleLayersBK){
     Node n("start");
     BKTree tree(&n);
     tree.add("stars");
@@ -124,7 +124,7 @@ TEST(BKTree, AddMultipleLayersBK){
     EXPECT_TRUE(next->containsKey(2));
 }
 
-TEST(BKTree, SearchBK){
+TEST(BKTest, SearchBK){
     BKTree tree;
     tree.add("hell");
     tree.add("help");
