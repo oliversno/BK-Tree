@@ -50,8 +50,8 @@ int BKTree::distence(const std::string& a, const std::string& b) const{
     // DP table
     std::vector<std::vector<int>> data_table (a.length()+1, std::vector<int>(b.length()+1, 0));
 
-    for(unsigned int i = 1; i < a.length(); ++i){
-        for(unsigned int j = 1; j < b.length(); ++j){
+    for(unsigned int i = 0; i <= a.length(); ++i){
+        for(unsigned int j = 0; j <= b.length(); ++j){
             // if a string is empty then only possible edit is other string length
             if(i == 0) {
                 data_table[i][j] = j;
