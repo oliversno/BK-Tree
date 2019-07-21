@@ -26,6 +26,7 @@ env:
     - CFLAGS="-Wall -Wextra -pedantic -Wconversion "
     - CXXFLAGS="-Wall -Wextra -pedantic -Wconversion"
 before_install:
+    - pip install --user cpp-coveralls
     - eval "${MATRIX_EVAL}"
     - which $CC
     - which $CXX
@@ -35,6 +36,9 @@ before_install:
 script:
   - mkdir Build
   - cd Build
-  - cmake .. -DBUILD_TESTS=ON
+  - cmake .. -DBUILD_TESTS=ON -DCOVERAGE=1
   - make
   - ctest -V
+
+  after_success:
+  - coveralls --root . -E ".*gtest.*" -E ".*CMakeFiles.*"
