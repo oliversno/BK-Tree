@@ -6,6 +6,7 @@
 #include <vector>
 #include <list>
 #include <algorithm>
+#include <memory>
 
 class InvalidKeyException{
     private:
@@ -17,17 +18,24 @@ class InvalidKeyException{
         }
 };
 
+class notInTreeException{
+    private:
+        const std::string word;
+    public:
+        notInTreeException(const std::string& word_) : word(word_){}
+        std::string operator()(){
+            return word;
+        }
+};
+
 class Node{
     private:
     std::string word;
-    std::unordered_map<int, Node*> children;
+    std::unordered_map<int, std::shared_ptr<Node>> children;
 
     public:
     //ctor
     Node(std::string word_);
-
-    //dtor
-    ~Node();
 
     std::string getWord() const;
 
@@ -37,15 +45,15 @@ class Node{
 
     bool containsKey(int key) const;
 
-    Node* &operator[](int i);
+    std::shared_ptr<Node> operator[](int i) const;
 
 };
 
 class BKTree{
     private:
-    Node* root;    
+    std::shared_ptr<Node> root;    
 
-    void recursiveSearch(Node* current_node, std::list<std::string>& results,
+    void recursiveSearch(std::shared_ptr<Node> current_node, std::list<std::string>& results,
      const std::string& query, int tolerence) const;
 
     int distence(const std::string& a, const std::string& b) const;
@@ -53,14 +61,12 @@ class BKTree{
     public:
     //ctor
     BKTree() : root(nullptr){}
-    BKTree(Node* ptr) : root(ptr){}
-
-    //dtor
-    ~BKTree();
 
     void add(const std::string& word);
 
-    const std::list<std::string> search(const std::string& query_, int tolerence) const;
+    std::list<std::string> search(const std::string& query_, int tolerence) const;
+
+    std::shared_ptr<const Node> get(const std::string& word) const;
     
 };
 

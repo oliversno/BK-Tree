@@ -3,7 +3,8 @@
 
 int main(){
     BKTree tree;
-    tree.add("start");
-    tree.add("next");
-    int test = 5;
+    tree.add("begin");
+    std::shared_ptr<const Node> ptr = tree.get("begin");
+    tree.add("");
+    bool res = ptr->containsKey(5);
 }
