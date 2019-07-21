@@ -103,7 +103,7 @@ void BKTree::recursiveSearch(std::shared_ptr<Node> current_node, std::list<std::
         }
         std::vector<int> keys = current_node->keys();
         for(int key : keys){
-            if(key >= min_dist && key >= max_dist){
+            if(key >= min_dist && key <= max_dist){
                 recursiveSearch((*current_node)[key], results, query, tolerence);
             }
         }
