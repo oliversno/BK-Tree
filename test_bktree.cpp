@@ -58,53 +58,60 @@ TEST(BKTest, InitBK){
 }
 
 TEST(BKTest, DistEmptyBK){
-    Node n("begin");
-    BKTree tree(&n);
+    BKTree tree;
+    tree.add("begin");
+    std::shared_ptr<const Node> ptr = tree.get("begin");
     tree.add("");
-    EXPECT_TRUE(n.containsKey(5));
+    EXPECT_TRUE(ptr->containsKey(5));
 }
 
 TEST(BKTest, DistEmptyBK2){
-    Node n("");
-    BKTree tree(&n);
+    BKTree tree;
+    tree.add("");
+    std::shared_ptr<const Node> ptr = tree.get("");
     tree.add("addition");
-    EXPECT_TRUE(n.containsKey(8));
+    EXPECT_TRUE(ptr->containsKey(8));
 }
 
 TEST(BKTest, DistEqualBK){
-    Node n("equal");
-    BKTree tree(&n);
+    BKTree tree;
     tree.add("equal");
-    std::vector<int> vec = n.keys();
+    std::shared_ptr<const Node> ptr = tree.get("equal");
+    tree.add("equal");
+    std::vector<int> vec = ptr->keys();
     EXPECT_TRUE(vec.empty());
 }
 
 TEST(BKTest, DistAddBK){
-    Node n("sittin");
-    BKTree tree(&n);
+    BKTree tree;
+    tree.add("sittin");
+    std::shared_ptr<const Node> ptr = tree.get("sittin");
     tree.add("sitting");
-    EXPECT_TRUE(n.containsKey(1));
+    EXPECT_TRUE(ptr->containsKey(1));
 }
 
 TEST(BKTest, DistDeleteBK){
-    Node n("sitting");
-    BKTree tree(&n);
+    BKTree tree;
+    tree.add("sitting");
+    std::shared_ptr<const Node> ptr = tree.get("sitting");
     tree.add("sittin");
-    EXPECT_TRUE(n.containsKey(1));
+    EXPECT_TRUE(ptr->containsKey(1));
 }
 
 TEST(BKTest, DistSubBK){
-    Node n("run");
-    BKTree tree(&n);
+    BKTree tree;
+    tree.add("run");
+    std::shared_ptr<const Node> ptr = tree.get("run");
     tree.add("ran");
-    EXPECT_TRUE(n.containsKey(1));
+    EXPECT_TRUE(ptr->containsKey(1));
 }
 
 TEST(BKTest, DistComplexBK){
-    Node n("kitten");
-    BKTree tree(&n);
+    BKTree tree;
+    tree.add("kitten");
+    std::shared_ptr<const Node> ptr = tree.get("kitten");
     tree.add("sitting");
-    EXPECT_TRUE(n.containsKey(3));
+    EXPECT_TRUE(ptr->containsKey(3));
 }
 
 TEST(BKTest, AddEmptyBK){
@@ -116,10 +123,11 @@ TEST(BKTest, AddEmptyBK){
 }
 
 TEST(BKTest, AddMultipleLayersBK){
-    Node n("start");
-    BKTree tree(&n);
+    BKTree tree;
+    tree.add("start");
+    std::shared_ptr<const Node> ptr = tree.get("start");
     tree.add("stars");
-    Node* next = n[1];
+    std::shared_ptr<Node> next = (*ptr)[1];
     tree.add("tart");
     EXPECT_TRUE(next->containsKey(2));
 }
