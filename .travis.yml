@@ -37,7 +37,7 @@ script:
   - mkdir Build
   - cd Build
   - cmake .. -DBUILD_TESTS=ON -DCMAKE_BUILD_TYPE=Coverage
-  - ./configure --enable-gcov && make && make check
+  - make
   - ctest -V
 
 after_success:
