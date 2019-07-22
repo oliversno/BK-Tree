@@ -86,6 +86,8 @@ void BKTree::add(const std::string& word_){
 }
 
 std::list<std::string> BKTree::search(const std::string& query_, int tolerence) const{
+    if(!root)
+        return std::list<std::string>{};
     std::string query = query_;
     std::transform(query.begin(), query.end(), query.begin(), ::tolower);
     std::list<std::string> res;

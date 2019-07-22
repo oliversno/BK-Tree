@@ -149,3 +149,23 @@ TEST(BKTest, SearchBK){
     std::list<std::string>res{vec.begin(),vec.end()};
     EXPECT_EQ(list,res);
 }
+
+TEST(BKTest, notInTreeExceptionBK){
+    BKTree tree;
+    EXPECT_THROW(tree.get("test"), notInTreeException);
+}
+
+TEST(BKTest, getBK){
+    BKTree tree;
+    tree.add("help");
+    tree.add("shel");
+    tree.add("smell");
+    tree.add("fell");
+    tree.add("felt");
+    tree.add("oops");
+    tree.add("pop");
+    tree.add("oouch");
+    tree.add("halt");
+    auto ptr = tree.get("oops");
+    EXPECT_EQ(ptr->getWord(), "oops");
+}
