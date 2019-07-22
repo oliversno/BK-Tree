@@ -9,12 +9,11 @@ set(CMAKE_AUTOMOC ON)
 
 include_directories(${PROJECT_SOURCE_DIR})
 
-# add_executable(main main.cpp bktree.cpp dict.cpp)
-
+add_executable(main main.cpp bktree.cpp dict.cpp)
 
 if(BUILD_TESTS)
     include_directories(${GTEST_INCLUDE_DIRS})
-
+    
     set(__CFLAGS "${CMAKE_C_FLAGS}")
     set(__CXXFLAGS "${CMAKE_CXX_FLAGS}")
     set(CMAKE_C_FLAGS "")
@@ -24,6 +23,10 @@ if(BUILD_TESTS)
     set(CMAKE_CXX_FLAGS "${__CXXFLAGS}")
     unset(__CFLAGS)
     unset(__CXXFLAGS)
+
+    SET(CMAKE_CXX_FLAGS_COVERAGE "${CMAKE_CXX_FLAGS_DEBUG} --coverage")
+    SET(CMAKE_EXE_LINKER_FLAGS_COVERAGE "${CMAKE_EXE_LINKER_FLAGS_DEBUG} --coverage")
+    SET(CMAKE_SHARED_LINKER_FLAGS_COVERAGE "${CMAKE_SHARED_LINKER_FLAGS_DEBUG} --coverage")
     
     enable_testing()
 

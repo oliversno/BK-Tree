@@ -4,6 +4,8 @@
 #include <unordered_set>
 #include <string>
 
+class InsertFailed{};
+
 class Dictionary{
     private:
     std::unordered_set<std::string> dict;
