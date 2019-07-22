@@ -26,19 +26,19 @@ env:
     - CFLAGS="-Wall -Wextra -pedantic -Wconversion "
     - CXXFLAGS="-Wall -Wextra -pedantic -Wconversion"
 before_install:
-    - pip install --user pyyaml cpp-coveralls
-    - eval "${MATRIX_EVAL}"
-    - which $CC
-    - which $CXX
-    - $CC --version
-    - $CXX --version
+  - pip install --user cpp-coveralls
+  - eval "${MATRIX_EVAL}"
+  - which $CC
+  - which $CXX
+  - $CC --version
+  - $CXX --version
 
 script:
   - mkdir Build
   - cd Build
   - cmake .. -DBUILD_TESTS=ON -DCMAKE_BUILD_TYPE=Coverage
-  - make
+  - ./configure --enable-gcov && make && make check
   - ctest -V
 
   after_success:
-  - coveralls --root . -E ".*gtest.*" -E ".*CMakeFiles.*"
+  - coveralls --exclude lib --exclude tests --gcov-options '\-lp'
