@@ -41,17 +41,14 @@ install:
   - gem install coveralls-lcov
 
 before_script:
-  - cd Build
   - lcov --directory . --zerocounters
 
 script:
-  - cd Build
   - cmake .. -DBUILD_TESTS=ON -DCMAKE_BUILD_TYPE=Coverage
   - make
   - ctest -V
 
 after_success:
-  - cd Build
   - lcov --directory . --capture --output-file coverage.info
   - lcov --remove coverage.info 'googletest/*' '/usr/*' --output-file coverage.info
   - lcov --list coverage.info
