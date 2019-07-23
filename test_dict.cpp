@@ -12,12 +12,6 @@ TEST(ApplyTest, AddDict){
     EXPECT_TRUE(dict.contains("testing"));
 }
 
-TEST(ApplyTest, AddDict2){
-    Dictionary dict;
-    dict.add("TESTING");
-    EXPECT_FALSE(dict.contains("TESTING"));
-}
-
 TEST(ApplyTest, DuplicateDict){
     Dictionary dict;
     dict.add("double");

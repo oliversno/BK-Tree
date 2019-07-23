@@ -6,10 +6,6 @@ TEST(NodeTest, InitNode){
     EXPECT_EQ(n.getWord(), "test");
 }
 
-TEST(NodeTest, LowercaseNode){
-    Node n ("CAPS");
-    EXPECT_EQ(n.getWord(), "caps");
-}
 
 TEST(NodeTest, AddChildNode){
     Node n("test");
