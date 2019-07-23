@@ -15,7 +15,7 @@ class Dictionary{
     // throws a InsertFailed Exception if the value can not be added
     void add(const std::string& word);
 
-    // returns true if query is in thhe dictionary, false otherwise
+    // returns true if query is in the dictionary, false otherwise
     bool contains(const std::string& query) const;
 };
 
