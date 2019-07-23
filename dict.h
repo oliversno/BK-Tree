@@ -13,7 +13,7 @@ class Dictionary{
     public:
     // adds new_word to the dictionary
     // throws a InsertFailed Exception if the value can not be added
-    void add(const std::string& new_word);
+    void add(const std::string& word);
 
     // returns true if query is in thhe dictionary, false otherwise
     bool contains(const std::string& query) const;

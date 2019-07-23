@@ -1,9 +1,7 @@
 #include "dict.h"
 #include <algorithm>
 
-void Dictionary::add(const std::string& new_word) {
-    std::string word = new_word;
-    std::transform(word.begin(), word.end(), word.begin(), ::tolower);  
+void Dictionary::add(const std::string& word) { 
     if(!dict.insert(word).second){
         throw InsertFailed();
     }

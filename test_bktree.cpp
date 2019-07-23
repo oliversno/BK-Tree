@@ -6,10 +6,6 @@ TEST(NodeTest, InitNode){
     EXPECT_EQ(n.getWord(), "test");
 }
 
-TEST(NodeTest, LowercaseNode){
-    Node n ("CAPS");
-    EXPECT_EQ(n.getWord(), "caps");
-}
 
 TEST(NodeTest, AddChildNode){
     Node n("test");
@@ -117,7 +113,7 @@ TEST(BKTest, DistComplexBK){
 TEST(BKTest, AddEmptyBK){
     BKTree tree;
     tree.add("this");
-    const std::list<std::string> list = tree.search("this",0);
+    std::list<std::string> list = tree.search("this",0);
     std::list<std::string>res{1,"this"};
     EXPECT_EQ(list, res);
 }
