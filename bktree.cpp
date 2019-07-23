@@ -1,12 +1,8 @@
 #include "bktree.h"
 #include <queue>
 
-Node::Node(std::string word_){
-    word = word_;
-    std::transform(word.begin(), word.end(), word.begin(), ::tolower);
-}
 
-std::string Node::getWord() const{
+const std::string& Node::getWord() const{
     return word;
 }
 
@@ -67,9 +63,7 @@ int BKTree::distence(const std::string& a, const std::string& b) const{
     return data_table[a.length()][b.length()];
 }  
 
-void BKTree::add(const std::string& word_){
-    std::string word = word_;
-    std::transform(word.begin(), word.end(), word.begin(), ::tolower);
+void BKTree::add(const std::string& word){
     if(!root){
         root = std::shared_ptr<Node>{new Node(word)};
         return;
@@ -85,18 +79,16 @@ void BKTree::add(const std::string& word_){
     current->addChild(dist, word);
 }
 
-std::list<std::string> BKTree::search(const std::string& query_, int tolerence) const{
+std::list<std::string> BKTree::search(const std::string& query, int tolerence) const{
     if(!root)
         return std::list<std::string>{};
-    std::string query = query_;
-    std::transform(query.begin(), query.end(), query.begin(), ::tolower);
     std::list<std::string> res;
     recursiveSearch(root, res, query, tolerence);
     return res;
 }
 
-void BKTree::recursiveSearch(std::shared_ptr<Node> current_node, std::list<std::string>& results,
-    const std::string& query, int tolerence) const{
+void BKTree::recursiveSearch(std::shared_ptr<const Node> current_node,
+    std::list<std::string>& results, const std::string& query, int tolerence) const{
         int dist = distence(current_node->getWord(), query);
         int min_dist = dist - tolerence;
         int max_dist = dist + tolerence;

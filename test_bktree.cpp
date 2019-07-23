@@ -117,7 +117,7 @@ TEST(BKTest, DistComplexBK){
 TEST(BKTest, AddEmptyBK){
     BKTree tree;
     tree.add("this");
-    const std::list<std::string> list = tree.search("this",0);
+    std::list<std::string> list = tree.search("this",0);
     std::list<std::string>res{1,"this"};
     EXPECT_EQ(list, res);
 }

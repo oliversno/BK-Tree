@@ -30,16 +30,16 @@ class notInTreeException{
 
 class Node{
     private:
-    std::string word;
+    const std::string word;
     std::unordered_map<int, std::shared_ptr<Node>> children;
 
     public:
     //ctor
-    Node(std::string word_);
+    Node(const std::string& word_) : word(word_){}
 
-    std::string getWord() const;
+    const std::string& getWord() const;
 
-    void addChild(int key, const std::string& word_);
+    void addChild(int key, const std::string& word);
 
     std::vector<int> keys() const;
 
@@ -53,7 +53,7 @@ class BKTree{
     private:
     std::shared_ptr<Node> root;    
 
-    void recursiveSearch(std::shared_ptr<Node> current_node, std::list<std::string>& results,
+    void recursiveSearch(std::shared_ptr<const Node> current_node, std::list<std::string>& results,
      const std::string& query, int tolerence) const;
 
     int distence(const std::string& a, const std::string& b) const;
@@ -64,7 +64,7 @@ class BKTree{
 
     void add(const std::string& word);
 
-    std::list<std::string> search(const std::string& query_, int tolerence) const;
+    std::list<std::string> search(const std::string& query, int tolerence) const;
 
     std::shared_ptr<const Node> get(const std::string& word) const;
     
